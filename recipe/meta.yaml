@@ -1,5 +1,5 @@
 {% set name = "kustomize" %}
-{% set version = "5.4.2" %}
+{% set version = "5.4.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/kubernetes-sigs/{{ name }}/archive/refs/tags/{{ name }}/v{{ version }}.tar.gz
-  sha256: 3c2c24971b29d96aac43853c090a5f042789d169bd41cbd9738c7979c5f09deb
+  sha256: 911e749de8d33a35ebeff50f65d0c3d79e5d1c9ff7eb9b73e29192d99b5f2444
 
 build:
   skip: true  # [win]
@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - {{ compiler('go') }}
-    -  go-licenses
+    - go-licenses
 
 test:
   commands:
