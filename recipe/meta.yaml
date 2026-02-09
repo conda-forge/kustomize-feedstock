@@ -1,5 +1,5 @@
 {% set name = "kustomize" %}
-{% set version = "5.8.0" %}
+{% set version = "5.8.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/kubernetes-sigs/{{ name }}/archive/refs/tags/{{ name }}/v{{ version }}.tar.gz
-  sha256: b1f441637b3e02ef2a20e6036ca44c14e4c4f0a59805685ae603f87225944ecb
+  sha256: 4ea5a974c46ad6efcde4fd9c339ab1bd278a80b6872dda2d1a366936e4638475
 
 build:
   skip: true  # [win]
-  number: 1
+  number: 0
 
 requirements:
   build:
