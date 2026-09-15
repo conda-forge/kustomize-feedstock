@@ -1,41 +1,45 @@
-{% set name = "kustomize" %}
-{% set version = "5.8.1" %}
+schema_version: 1
+
+context:
+  name: kustomize
+  version: "5.8.1"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/kubernetes-sigs/{{ name }}/archive/refs/tags/{{ name }}/v{{ version }}.tar.gz
+  url: https://github.com/kubernetes-sigs/${{ name }}/archive/refs/tags/${{ name }}/v${{ version }}.tar.gz
   sha256: 4ea5a974c46ad6efcde4fd9c339ab1bd278a80b6872dda2d1a366936e4638475
 
 build:
-  skip: true  # [win]
-  number: 0
+  number: 1
+  skip: win
 
 requirements:
   build:
-    - {{ compiler('go') }}
+    - ${{ compiler('go') }}
     - go-licenses
 
-test:
-  commands:
-    - kustomize version  # [not win]
+tests:
+  - script:
+      - if: not win
+        then: kustomize version
 
 about:
-  home: https://kustomize.io/
-  summary: 'Kubernetes native configuration management'
+  summary: Kubernetes native configuration management
   description: |
     kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.
     kustomize targets kubernetes; it understands and can patch kubernetes style API objects. It's like make, in that what it does is declared in a file, and it's like sed, in that it emits edited text.
   license: Apache-2.0
-  license_family: Apache
   license_file:
     - LICENSE
     - kustomize/license-files/
-  doc_url: https://kubectl.docs.kubernetes.io/
-  dev_url: https://github.com/kubernetes-sigs/kustomize
+  homepage: https://kustomize.io/
+  repository: https://github.com/kubernetes-sigs/kustomize
+  documentation: https://kubectl.docs.kubernetes.io/
 
 extra:
   recipe-maintainers:
     - levsha
+    - xhochy
